@@ -1,0 +1,277 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;  
+}
+
+.wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+
+    .counters {
+        position: absolute;
+        top: 20px;
+        display: flex;
+        justify-content: space-between;
+        width: 90%;
+
+        .rounds {
+            text-align: center;
+            vertical-align: middle;
+
+            .total-rounds {
+                margin-left: 5px;
+            }
+        }
+
+        .score {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        span {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 40px;
+            font-weight: 400;
+            vertical-align: middle;
+        }
+    }
+
+    .items {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        transition: 0.5s;
+
+        div {
+            position: relative;
+
+            &.disable {
+                pointer-events: none;
+                user-select: none;
+            }
+
+            img {
+                cursor: pointer;
+                user-select: none;
+                transition: 0.4s ease-in-out;
+                animation-name: scaleInOut;
+                animation-duration: 3s;
+                animation-iteration-count: infinite;
+
+                @keyframes scaleInOut {
+                    0% {
+                        transform: scale(1);
+                    }
+
+                    50%  {
+                        transform: scale(1.1);
+                    }
+
+                    100% {
+                        transform: scale(1);
+                    }
+                }
+
+                &:hover {
+                    animation-play-state: paused;
+                }
+            }
+
+            span {
+                display: none;
+                transition: 0.5s;
+            }
+
+            &:hover {
+                span {
+                    display: inline;
+                    position: absolute;
+                    bottom: -20px;
+                    left: 25px;
+                    transition: 1s;
+                    background-color: #eaeaea;
+                    padding: 6px 12px;
+                    color: #444;
+                    border-radius: 4px;
+                    text-align: center;
+                    font-size: 12px;
+                    font-weight: bold;
+                }
+            }
+        }
+
+        .rock {
+            img {
+                width: 100px;
+                height: 100px;
+            }
+        }
+
+        .paper {
+            img {
+                width: 115px;
+                height: 115px;
+            }
+        }
+
+        .scissor {
+            img {
+                width: 90px;
+                height: 90px;
+            }
+        }
+    }
+
+    .choose-text {
+        margin-top: 40px;
+        cursor: text;
+        pointer-events: none;
+        user-select: none;
+        color: #444;
+        border: 1px solid #444;
+        padding: 6px 20px;
+        border-radius: 6px;
+        font-size: 15px;
+        transition: 0.8s;
+    }
+
+    .selection {
+        visibility: hidden;
+        margin-top: 20px;
+        text-align: center;
+        height: 140px;
+
+        div {
+            margin-bottom: 10px;
+            span {
+                font-weight: bold;
+            }
+        }
+
+        .result {
+            &.won {
+                color: #1d4d1d;
+            }
+
+            &.lost {
+                color: #8f5a5a;
+            }
+
+            &.tied {
+                color: #5d496b;
+            }
+        }
+
+        .play-again {
+            margin-top: 20px;
+            margin-bottom: 0;
+            cursor: pointer;
+            color: #535535;
+            font-size: 18px;
+            text-decoration: underline;
+            animation-name: spaced;
+            animation-duration: 3s;
+            animation-iteration-count: infinite;
+
+            &.inactive {
+                pointer-events: none;
+                user-select: none;
+            }
+
+            @keyframes spaced {
+                0% {
+                    letter-spacing: 0;
+                }
+
+                33% {
+                    letter-spacing: 2px;
+                }
+
+                67%  {
+                    letter-spacing: 4px;
+                }
+
+                100% {
+                    letter-spacing: 0;
+                }
+            }
+        }
+    }
+
+    .round-result {
+        display: none;
+        position: absolute;
+        background: #8f8162;
+        color: #fff;
+        padding: 6px 16px;
+        border-radius: 6px;
+        font-size: 30px;
+        width: 80%;
+        text-align: center;
+        bottom: 40px;
+
+        &.show {
+            display: block;
+            animation-name: move;
+            animation-duration: 2s;
+
+            @keyframes move {
+                0% {
+                    transform: rotateZ(0deg);
+                }
+
+                33%  {
+                    transform: rotateZ(3deg);
+                }
+
+                67%  {
+                    transform: rotateZ(-3deg);
+                }
+
+                100% {
+                    transform: rotateZ(0deg);
+                }
+            }
+        }
+
+        .close-btn {
+            cursor: pointer;
+            position: absolute;
+            top: -10px;
+            right: -15px;
+            background-color: #5c4829;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            font-size: 20px;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .wrapper {
+        .counters {
+            align-items: center;
+            flex-direction: column;
+            
+            span {
+                font-size: 25px;
+            }
+        }
+
+        .round-result {
+            font-size: 20px;
+            bottom: 50px;
+        }
+    }
+}
